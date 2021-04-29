@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import stockanalyzer.ctrl.Controller;
+import stockanalyzer.exception.YahooApiException;
 
 public class UserInterface 
 {
@@ -13,17 +14,51 @@ public class UserInterface
 	private Controller ctrl = new Controller();
 
 	public void getDataFromCtrl1(){
-		ctrl.process("ABC");
+		try {
+			ctrl.process("NOK");
+		} catch (YahooApiException e) {
+			e.printStackTrace();
+		}
 	}
 
-	public void getDataFromCtrl2(){
+	public void getDataFromCtrl2()  {
+		try {
+			ctrl.process("FB");
+		} catch (YahooApiException e) {
+			e.printStackTrace();
+		}
 	}
 
-	public void getDataFromCtrl3(){
+	public void getDataFromCtrl3()  {
+		try {
+			ctrl.process("TSLA");
+		} catch (YahooApiException e) {
+			e.printStackTrace();
+		}
 
 	}
-	public void getDataFromCtrl4(){
+	public void getDataFromCtrl4()  {
+		try {
+			ctrl.process("NOK2");
+		} catch (YahooApiException e) {
+			e.printStackTrace();
+		}
 
+	}
+	public void getDataFromCtrl5()  {
+		try {
+			ctrl.process("FB2");
+		} catch (YahooApiException e) {
+			e.printStackTrace();
+		}
+
+	}
+	public void getDataFromCtrl6(){
+		try {
+			ctrl.process("TSLA2");
+		} catch (YahooApiException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void getDataForCustomInput() {
@@ -32,13 +67,15 @@ public class UserInterface
 
 
 	public void start() {
-		Menu<Runnable> menu = new Menu<>("User Interfacx");
+		Menu<Runnable> menu = new Menu<>("User Interface");
 		menu.setTitel("Wählen Sie aus:");
-		menu.insert("a", "Choice 1", this::getDataFromCtrl1);
-		menu.insert("b", "Choice 2", this::getDataFromCtrl2);
-		menu.insert("c", "Choice 3", this::getDataFromCtrl3);
-		menu.insert("d", "Choice User Imput:",this::getDataForCustomInput);
-		menu.insert("z", "Choice User Imput:",this::getDataFromCtrl4);
+		menu.insert("a", "Nokia", this::getDataFromCtrl1);
+		menu.insert("b", "Facebook", this::getDataFromCtrl2);
+		menu.insert("c", "Tesla", this::getDataFromCtrl3);
+		menu.insert("d", "Nokia History", this::getDataFromCtrl4);
+		menu.insert("e", "Facebook History", this::getDataFromCtrl5);
+		menu.insert("f", "Tesla History", this::getDataFromCtrl6);
+
 		menu.insert("q", "Quit", null);
 		Runnable choice;
 		while ((choice = menu.exec()) != null) {
