@@ -47,6 +47,10 @@ public class Controller {
                     stock = yahoofinance.YahooFinance.get("NOK");
                     stock.getHistory(cal, Interval.DAILY).forEach(System.out::println);
                     amountData(stock);
+                    System.out.println("Anzahl der Datensätze: " +  amountData(stock));
+                    System.out.println("Höchster Wert: " +  max(stock));
+                    System.out.println("Tiefster Wert: " +  min(stock));
+                    System.out.println("Durchschnitt: " +  average(stock));
                     break;
                 case "FB2":
                     getData("FB");
@@ -75,7 +79,6 @@ public class Controller {
                     System.out.println("Höchster Wert: " +  max(stock));
                     System.out.println("Tiefster Wert: " +  min(stock));
                     System.out.println("Durchschnitt: " +  average(stock));
-
                     break;
 
             }
