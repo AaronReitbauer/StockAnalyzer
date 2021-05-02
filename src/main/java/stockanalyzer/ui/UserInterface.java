@@ -60,6 +60,13 @@ public class UserInterface
 			e.printStackTrace();
 		}
 	}
+	public void getDataFromCtrl7(){
+		try {
+			ctrl.process("GOOG");
+		} catch (YahooApiException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public void getDataForCustomInput() {
 		
@@ -75,6 +82,7 @@ public class UserInterface
 		menu.insert("d", "Nokia History", this::getDataFromCtrl4);
 		menu.insert("e", "Facebook History", this::getDataFromCtrl5);
 		menu.insert("f", "Tesla History", this::getDataFromCtrl6);
+		menu.insert("g", "Google History", this::getDataFromCtrl7);
 
 		menu.insert("q", "Quit", null);
 		Runnable choice;
