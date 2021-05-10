@@ -1,19 +1,16 @@
 package stockanalyzer.ctrl;
 
+import stockanalyzer.download.Downloader;
+import stockanalyzer.download.SequentialDownloader;
 import stockanalyzer.exception.YahooApiException;
 import yahooApi.YahooFinance;
 import yahooApi.beans.QuoteResponse;
 import yahooApi.beans.YahooResponse;
 import yahoofinance.Stock;
-import yahoofinance.histquotes.HistoricalQuote;
 import yahoofinance.histquotes.Interval;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.*;
-import java.util.spi.CalendarDataProvider;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Controller {
     YahooFinance yahooFinance = new YahooFinance();
@@ -98,27 +95,23 @@ public class Controller {
 
     public long amountData(Stock stock) throws IOException, YahooApiException {
         return stock.getHistory().size();
-
     }
     public double average(Stock stock) throws IOException {
         return stock.getHistory().stream().mapToDouble(q->q.getClose().doubleValue()).average().orElse(0.0);
-
     }
 
     public double min(Stock stock) throws IOException {
         return stock.getHistory().stream().mapToDouble(q->q.getClose().doubleValue()).min().orElse(0.0);
-
     }
     public double max(Stock stock) throws IOException {
         return stock.getHistory().stream().mapToDouble(q->q.getClose().doubleValue()).max().orElse(0.0);
-
     }
-    /*public void minMaxValue (Stock stock) throws IOException, YahooApiException {
-        System.out.println("Max: "+stock.getHistory().stream().max(Comparator.comparing(HistoricalQuote::getHigh)));
-        System.out.println("Min: "+stock.getHistory().stream().min(Comparator.comparing(HistoricalQuote::getLow)));
 
-    }*/
     public void closeConnection() {
 
+    }
+
+    public void downloadTickers(List<String> tickers, Downloader downloader) {
+        downloader.process(tickers);
     }
 }
